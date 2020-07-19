@@ -1,16 +1,38 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useWindowDimensions, Vibration} from 'react-native';
 import {VerticalScreen} from "./VerticalScreen";
 import {HorizontalScreen} from "./HorizontalScreen";
+import {useDispatch} from "react-redux";
+import {addCalculate} from "../../redux/actions/history-action";
 
 
-export const CalculatorScreen = () => {
+export const CalculatorScreen = ({route}) => {
     const [resultText, setResultText] = useState('0')
     const [calculationText, setCalculationText] = useState('')
     const windowWidth = useWindowDimensions().width;
     const windowHeight = useWindowDimensions().height;
     const operations = ['DEL', '+', '-', '*', '/']
     const horizontalOperations = [['(', ')', '^'], ['sin', 'cos', 'tan'], ['√', 'log', 'e']]
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (route.params) {
+            setResultText(route.params.result)
+            setCalculationText(route.params.calculate)
+        }
+    }, [route.params])
+
+    const getDate = () => {
+        const date = new Date()
+        const day = date.getDate()
+        const month = date.getMonth()
+        const year = date.getFullYear()
+        const hours = date.getHours()
+        const minuts = date.getMinutes()
+        const seconds = date.getSeconds()
+        const fullDate = `${day}.${month}.${year} | ${hours}:${minuts}:${seconds}`
+        return fullDate
+    }
 
     const calculateResult = () => {
         let text = calculationText
@@ -36,7 +58,10 @@ export const CalculatorScreen = () => {
             text = text.replace(/e/g, 'Math.E')
         }
         try {
-            setResultText(eval(text))
+            const answer = eval(text)
+            setResultText(answer)
+            const newCalc = {calculate: text, result: answer, date: getDate()}
+            dispatch(addCalculate(newCalc))
         } catch (e) {
             if (e instanceof SyntaxError) {
                 setResultText('ОШИБКА')
@@ -98,7 +123,6 @@ export const CalculatorScreen = () => {
             case '√':
             case 'log':
                 let bracket = '('
-                // if (operation === 'cos' || operation === 'sin') bracket = '('
                 setCalculationText(calculationText + operation + bracket)
                 break
         }

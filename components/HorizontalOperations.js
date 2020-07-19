@@ -4,15 +4,17 @@ import {TouchableOpacity} from "react-native";
 import {Text} from "react-native";
 import {View} from "react-native";
 import {StyleSheet} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 export const HorizontalOperations = ({operate, horizontalOperations}) => {
+    const {colors} = useTheme()
     let horizontalOps = []
     for (let i = 0; i < 3; i++) {
         let row = []
         for (let j = 0; j < 3; j++) {
-            row.push(<TouchableOpacity key={horizontalOperations[i][j]} style={styles.btn}
+            row.push(<TouchableOpacity key={horizontalOperations[i][j]} style={{...styles.btn, backgroundColor: colors.mainTheme.bg2}}
                                        onPress={() => operate(horizontalOperations[i][j])}>
-                <Text style={[styles.btnText, {color: '#00CBFC'}]}>{horizontalOperations[i][j]}</Text>
+                <Text style={{...styles.btnText, color: colors.mainTheme.textColor}}>{horizontalOperations[i][j]}</Text>
             </TouchableOpacity>)
         }
         horizontalOps.push(<View style={styles.row}>{row}</View>)

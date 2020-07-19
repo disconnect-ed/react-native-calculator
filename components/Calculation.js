@@ -2,11 +2,13 @@ import React from 'react'
 import {Text} from "react-native";
 import {View} from "react-native";
 import {StyleSheet} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 export const Calculation = ({calculationText}) => {
+    const {colors} = useTheme()
     return (
-        <View style={styles.calculation}>
-            <Text style={styles.calculationText}>{calculationText}</Text>
+        <View style={{...styles.calculation, backgroundColor: colors.mainTheme.bg3}}>
+            <Text style={{...styles.calculationText, color: colors.mainTheme.textColor2}}>{calculationText}</Text>
         </View>
     )
 }
@@ -14,11 +16,9 @@ export const Calculation = ({calculationText}) => {
 const styles = StyleSheet.create({
     calculationText: {
         fontSize: 30,
-        color: '#00CBFC'
     },
     calculation: {
         flex: 1,
-        backgroundColor: '#0F0F0F',
         justifyContent: 'center',
         alignItems: 'flex-end'
     },

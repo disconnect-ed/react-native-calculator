@@ -4,14 +4,17 @@ import {TouchableOpacity} from "react-native";
 import {Text} from "react-native";
 import {View} from "react-native";
 import {StyleSheet} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 export const Numbers = ({buttonPressed}) => {
+    const {colors} = useTheme()
     let rows = []
     for (let i = 0; i < 4; i++) {
         let row = []
         let nums = [[1, 2, 3], [4, 5, 6], [7, 8, 9], ['.', 0, '=']]
         for (let j = 0; j < 3; j++) {
-            row.push(<TouchableOpacity onPress={() => buttonPressed(nums[i][j])} style={styles.btn}>
+            row.push(<TouchableOpacity onPress={() => buttonPressed(nums[i][j])}
+                                       style={{...styles.btn, backgroundColor: colors.mainTheme.bg1}}>
                 <Text style={styles.btnText}>{nums[i][j]}</Text>
             </TouchableOpacity>)
         }

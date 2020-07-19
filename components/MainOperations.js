@@ -3,16 +3,18 @@ import {TouchableOpacity} from "react-native";
 import {Text} from "react-native";
 import {View} from "react-native";
 import {StyleSheet} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 export const MainOperations = ({deleteAll, operate, operations}) => {
+    const {colors} = useTheme()
     let ops = []
     for (let i = 0; i < 5; i++) {
         const deleteButton = operations[i] === 'DEL' ? true : null
-        ops.push(<TouchableOpacity style={styles.btn}
+        ops.push(<TouchableOpacity style={{...styles.btn, backgroundColor: colors.mainTheme.bg2}}
                                    onPress={() => operate(operations[i])}
                                    onLongPress={deleteButton ? deleteAll : null}
         >
-            <Text style={[styles.btnText, {color: deleteButton ? '#C17D00' : '#00CBFC'}]}>{operations[i]}</Text>
+            <Text style={{...styles.btnText, color: colors.mainTheme.textColor}}>{operations[i]}</Text>
         </TouchableOpacity>)
     }
     return (
