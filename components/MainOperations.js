@@ -13,6 +13,7 @@ export const MainOperations = ({deleteAll, operate, operations}) => {
         ops.push(<TouchableOpacity style={{...styles.btn, backgroundColor: colors.mainTheme.bg2}}
                                    onPress={() => operate(operations[i])}
                                    onLongPress={deleteButton ? deleteAll : null}
+                                   key={operations[i]}
         >
             <Text style={{...styles.btnText, color: colors.mainTheme.textColor}}>{operations[i]}</Text>
         </TouchableOpacity>)
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
     },
     operations: {
         flex: 1,
-        backgroundColor: '#1C1C1C',
         justifyContent: 'space-between'
     }
 });

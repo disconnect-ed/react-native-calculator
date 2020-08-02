@@ -11,7 +11,7 @@ export const VerticalScreen = ({calculationText, resultText, buttonPressed, oper
             <Result resultText={resultText} />
             <Calculation calculationText={calculationText} />
             <View style={styles.buttons}>
-                <Numbers buttonPressed={buttonPressed}/>
+                <Numbers operate={operate} operations={operations} buttonPressed={buttonPressed}/>
                 <MainOperations operations={operations} deleteAll={deleteAll} operate={operate}/>
             </View>
         </View>

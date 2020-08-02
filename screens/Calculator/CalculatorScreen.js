@@ -58,8 +58,15 @@ export const CalculatorScreen = ({route}) => {
             text = text.replace(/e/g, 'Math.E')
         }
         try {
-            const answer = eval(text)
-            setResultText(answer)
+            let answer = eval(text)
+            if (isNaN(answer)) {
+                answer = 0
+            } else if (!isFinite(answer)) {
+                answer = '∞'
+                setResultText('∞')
+            } else {
+                setResultText(answer)
+            }
             const newCalc = {calculate: text, result: answer, date: getDate()}
             dispatch(addCalculate(newCalc))
         } catch (e) {
@@ -77,12 +84,14 @@ export const CalculatorScreen = ({route}) => {
             case '-':
             case '*':
             case '/':
+            case '.':
                 return false
         }
         return true
     }
 
     const buttonPressed = (text) => {
+        if (text === '=' && calculationText === '') return
         if (text === '=') {
             return validate() && calculateResult()
         }
@@ -93,10 +102,8 @@ export const CalculatorScreen = ({route}) => {
         switch (operation) {
             case 'DEL':
                 let text = calculationText.split('')
-                console.log(text.lastIndexOf('n'))
                 if (text.lastIndexOf('n') > 0 || text.lastIndexOf('s') > 0) {
                     text = text.slice(0, -3)
-                    console.log(text)
                 } else {
                     text.pop()
                 }
@@ -107,9 +114,11 @@ export const CalculatorScreen = ({route}) => {
             case '*':
             case '/':
             case '^':
+            case '.':
                 const lastChar = calculationText.split('').pop()
                 if (operations.indexOf(lastChar) > 0) return
                 if (calculationText === '' && operation !== '-') return
+                if (calculationText.slice(-1) === '.') return
                 setCalculationText(calculationText + operation)
                 break
             case '(':

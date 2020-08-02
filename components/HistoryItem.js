@@ -36,16 +36,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     date: {
-        color: '#00CBFC',
         fontSize: 16,
         marginBottom: 15
     },
     calc: {
-        color: '#00CBFC',
         fontSize: 20,
     },
     result: {
-        color: '#00CBFC',
         fontSize: 20,
     },
     calcInfo: {

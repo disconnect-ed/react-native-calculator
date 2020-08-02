@@ -15,7 +15,7 @@ export const HorizontalScreen = ({calculationText, resultText, buttonPressed, op
             <Calculation calculationText={calculationText} />
             <View style={styles.buttons}>
                 <HorizontalOperations operate={operate} horizontalOperations={horizontalOperations} />
-                <Numbers buttonPressed={buttonPressed}/>
+                <Numbers operate={operate} operations={operations} buttonPressed={buttonPressed}/>
                 <MainOperations operations={operations} deleteAll={deleteAll} operate={operate}/>
             </View>
         </View>
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     },
     buttons: {
         flexGrow: 5,
-        flexDirection: 'row'
+        flexDirection: 'row',
     }
 });

@@ -6,8 +6,8 @@ import {CalculatorScreen} from "../screens/Calculator/CalculatorScreen";
 import {DrawerContent} from "./DrawerContent";
 
 export const AppNavigation = () => {
-    const Drawer = createDrawerNavigator();
     const [isDarkTheme, setTheme] = useState(true)
+    const Drawer = createDrawerNavigator();
     const selectTheme = () => {
         setTheme(!isDarkTheme)
     }
@@ -40,11 +40,6 @@ export const AppNavigation = () => {
 
                               }}
                               edgeWidth={500}
-
-                              // drawerStyle={{
-                              //     backgroundColor: '#0F0F0F',
-                              //     width: 250,
-                              // }}
             >
                 <Drawer.Screen name="Calculator" component={CalculatorScreen}
                                options={{

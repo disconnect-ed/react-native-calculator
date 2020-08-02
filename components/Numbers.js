@@ -6,14 +6,19 @@ import {View} from "react-native";
 import {StyleSheet} from "react-native";
 import {useTheme} from "@react-navigation/native";
 
-export const Numbers = ({buttonPressed}) => {
+export const Numbers = ({buttonPressed, operate}) => {
     const {colors} = useTheme()
     let rows = []
     for (let i = 0; i < 4; i++) {
         let row = []
         let nums = [[1, 2, 3], [4, 5, 6], [7, 8, 9], ['.', 0, '=']]
         for (let j = 0; j < 3; j++) {
-            row.push(<TouchableOpacity onPress={() => buttonPressed(nums[i][j])}
+            row.push(<TouchableOpacity key={nums[i][j]}
+                                       onPress={() => {nums[i][j] === '.' ?
+                                           operate('.')
+                                           :
+                                           buttonPressed(nums[i][j])
+                                       }}
                                        style={{...styles.btn, backgroundColor: colors.mainTheme.bg1}}>
                 <Text style={styles.btnText}>{nums[i][j]}</Text>
             </TouchableOpacity>)
@@ -21,7 +26,7 @@ export const Numbers = ({buttonPressed}) => {
         rows.push(<View style={styles.row}>{row}</View>)
     }
     return (
-        <View style={styles.numbers}>
+        <View style={{...styles.numbers, backgroundColor: colors.mainTheme.bg1}}>
             {rows}
         </View>
     )
@@ -46,6 +51,5 @@ const styles = StyleSheet.create({
     },
     numbers: {
         flex: 3,
-        backgroundColor: '#262626',
     }
 });

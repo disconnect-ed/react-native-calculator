@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     },
     calculation: {
         flex: 1,
+        paddingHorizontal: 15,
         justifyContent: 'center',
         alignItems: 'flex-end'
     },

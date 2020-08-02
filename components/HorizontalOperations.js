@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     },
     horizontalOperations: {
         flex: 3,
-        backgroundColor: '#1C1C1C',
         justifyContent: 'space-between',
     }
 });

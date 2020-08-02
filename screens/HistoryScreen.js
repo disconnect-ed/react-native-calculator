@@ -54,7 +54,7 @@ export const HistoryScreen = () => {
     }
 
     if (loading) {
-        return <Text style={styles.notFound}>Загрузка...</Text>
+        return <Text style={{...styles.notFound, color: colors.mainTheme.textColor2}}>Загрузка...</Text>
     }
 
     return (
@@ -71,7 +71,8 @@ export const HistoryScreen = () => {
             <FlatList data={allHistory} renderItem={({item}) => <HistoryItem removeCalc={removeCalc} goCalc={goCalc}
                                                                              item={item} colors={colors}/>}
                       keyExtractor={item => item.id}
-                      ListEmptyComponent={() => <Text style={styles.notFound}>Пусто</Text>}
+                      ListEmptyComponent={() => <Text style={{...styles.notFound,
+                          color: colors.mainTheme.textColor2}}>Пусто</Text>}
             />
         </View>
     )
@@ -80,26 +81,21 @@ export const HistoryScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0F0F0F',
         paddingTop: 20,
-        // paddingHorizontal: 10
     },
     title: {
         fontSize: 30,
-        color: '#00CBFC',
-
     },
     header: {
         marginBottom: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     notFound: {
         fontSize: 25,
-        color: '#00CBFC',
         textAlign: 'center',
-        paddingVertical: '50%'
+        marginTop: 50
     }
 })

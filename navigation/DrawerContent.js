@@ -7,7 +7,6 @@ import {useTheme} from "@react-navigation/native";
 
 export const DrawerContent = ({selectTheme, isDarkTheme, ...props}) => {
     const {colors} = useTheme()
-    console.log(colors)
     return (
         <View style={{...styles.container, backgroundColor: colors.mainTheme.bg3}}>
             <DrawerContentScrollView {...props}>
@@ -16,7 +15,8 @@ export const DrawerContent = ({selectTheme, isDarkTheme, ...props}) => {
                         <DrawerItemList {...props} />
                         <View style={{...styles.theme, borderColor: colors.mainTheme.textColor2}}>
                             <Text style={{...styles.text, color: colors.mainTheme.textColor2}}>Темная тема</Text>
-                            <Switch tintColor={colors.mainTheme.bg2} color={'#00CBFC'} onValueChange={selectTheme} value={isDarkTheme} />
+                            <Switch tintColor={colors.mainTheme.bg2} color={'#00CBFC'}
+                                    onValueChange={selectTheme} value={isDarkTheme} />
                         </View>
                 </View>
             </DrawerContentScrollView>
@@ -27,7 +27,6 @@ export const DrawerContent = ({selectTheme, isDarkTheme, ...props}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0F0F0F'
     },
     title: {
         fontSize: 30,
